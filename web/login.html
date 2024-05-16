@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>用户登录</title>
+        <script>
+            //用户名正则校验
+            function checkUsername() {
+                let username = document.getElementById("username").value;
+                let reg = /^[a-zA-Z0-9]{4,10}$/;
+                if (reg.test(username)) {
+                    document.getElementById("userspan").innerText = "OK";
+                    return true;
+                } else {
+                    document.getElementById("userspan").innerText = "用户名格式不正确";
+                    return false;
+                }
+            }
+
+            //表单校验
+            function login() {
+                let username = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+                if (username == "" || password == "") {
+                    document.getElementById("userspan").innerText = "用户名或密码不能为空";
+                    return false;
+                } else if (checkUsername()) {
+                    document.getElementById("pwdspan").innerText = "OK";
+                    return true;
+                }else {
+                    document.getElementById("pwdspan").innerText = "用户名或密码不能为空";
+                  return false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1 style="text-align: center">欢迎登录</h1>
+        <form method="post" action="/user/login" onsubmit="return login()">
+            <!--表格居中,边框5px实线,圆角5px-->
+            <table style="border: 5px solid darkcyan;border-radius: 5px;">
+                <!--表格内部2px实线-->
+
+                <tr style="border: 2px solid darkcyan">
+                    <td>用户名:</td>
+                    <td><input id="username" type="text" name="username" placeholder="请输入用户名" onblur="checkUsername()"><span id="userspan"></span></td>
+                </tr>
+                <tr style="border: 2px solid darkcyan">
+                    <td>密码:</td>
+                    <td><input id="password" type="password" name="password" placeholder="请输入密码" onblur="login()"><span id="pwdspan"></span></td>
+                </tr>
+                <tr style="border: 2px solid darkcyan">
+                    <td style="text-align: center">
+                      <input type="submit" value="登录">
+                    </td>
+                    <td style="text-align: center">
+                      <input type="reset" value="重置">
+                    </td>
+                    <td style="text-align: center">
+                      <a href="regist.html">注册</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
